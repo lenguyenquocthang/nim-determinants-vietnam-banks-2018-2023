@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="vi" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Yếu tố tác động đến NIM của ngân hàng thương mại Việt Nam, 2018–2023 · Báo cáo</title>
+<meta name="description" content="Báo cáo thực hành nghề nghiệp: dữ liệu bảng 27 ngân hàng TMCP niêm yết, 2018–2023 (162 quan sát), Pooled OLS, FEM, REM, FGLS. Practicum report on NIM determinants of Vietnamese banks.">
+<script>document.documentElement.className+=" js"</script>
+<style>
+:root{--bg:#F7F7F2;--ink:#171C1E;--mute:#5B6365;--acc:#327F76;--line:#C7CFCC;--warn:#BB6946;--soft:#EEEFE8;--accsoft:rgba(50,127,118,.10);--warnsoft:rgba(187,105,70,.11);
+--serif:"Noto Serif","Cambria","Times New Roman",Times,serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--mono:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+:root[data-theme=dark]{--bg:#101415;--ink:#E6ECEA;--mute:#9DA7A5;--acc:#62B5AA;--line:#2D3739;--warn:#E49873;--soft:#171D1F;--accsoft:rgba(98,181,170,.13);--warnsoft:rgba(228,152,115,.13)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 var(--sans);overflow-x:clip}
+html[lang=vi] .en,html[lang=en] .vi{display:none!important}
+a{color:var(--acc)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+/* top bar */
+.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:18px;height:48px}
+.brand{font:600 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.nav::-webkit-scrollbar{display:none}
+.nav a{font:500 12px/1 var(--mono);color:var(--mute);text-decoration:none;padding:8px 9px;white-space:nowrap;border-bottom:2px solid transparent}
+.nav a:hover,.nav a.on{color:var(--ink);border-color:var(--acc)}
+.tog{display:flex;gap:6px}
+.tog button{font:600 11px/1 var(--mono);background:none;color:var(--ink);border:1px solid var(--line);padding:7px 9px;cursor:pointer;border-radius:2px}
+.tog button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+/* type */
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.18;margin:0}
+h1{font-size:clamp(30px,4.6vw,56px);letter-spacing:-.015em}
+h2{font-size:clamp(24px,3vw,36px);letter-spacing:-.01em;margin-bottom:6px}
+h3{font-size:19px;margin:30px 0 8px}
+p{margin:0 0 14px;max-width:68ch}
+.kick{font:600 11px/1.4 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--acc)}
+.mono{font-family:var(--mono)}
+.mute{color:var(--mute)}
+small,.cap{font-size:13px;color:var(--mute);line-height:1.5}
+.cap{font-family:var(--mono);font-size:11.5px;margin-top:8px;max-width:none}
+/* sections */
+section{padding:clamp(48px,8vw,92px) 0;border-top:1px solid var(--line)}
+.sh{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+.sn{font:500 12px/1 var(--mono);color:var(--acc);letter-spacing:.06em}
+.cols{display:grid;grid-template-columns:minmax(0,7.4fr) minmax(0,3.6fr);gap:clamp(28px,5vw,64px);align-items:start}
+.full{grid-column:1/-1}
+aside.note{border-left:2px solid var(--line);padding:2px 0 2px 16px;font-size:13px;color:var(--mute);line-height:1.55}
+aside.note b{display:block;font:600 10.5px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
+aside.note.w{border-color:var(--warn)}
+aside.note.a{border-color:var(--acc)}
+/* hero */
+.hero{padding:clamp(36px,6vw,72px) 0 clamp(40px,6vw,72px);border-top:0}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:end}
+.deck{font:400 clamp(17px,1.6vw,20px)/1.55 var(--serif);color:var(--ink);margin:18px 0 22px;max-width:58ch}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink);margin-top:26px}
+.facts div{padding:12px 12px 0 0}
+.facts b{display:block;font:600 clamp(24px,2.4vw,32px)/1 var(--serif);letter-spacing:-.01em;white-space:nowrap}
+.facts span{display:block;font-size:12px;color:var(--mute);margin-top:6px;line-height:1.35}
+.by{font:500 12px/1.5 var(--mono);color:var(--mute);margin-top:22px}
+.scope{border-left:2px solid var(--acc);padding:2px 0 2px 14px;margin-top:20px;font-size:14px;color:var(--mute);max-width:60ch}
+figure{margin:0}
+figure svg{display:block;width:100%;height:auto;overflow:visible}
+/* tables */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:6px 0 4px}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 12px 8px 0;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font:600 11px/1.3 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--mute);border-bottom:1px solid var(--ink);white-space:nowrap}
+td.n,th.n{text-align:right;padding-right:14px;white-space:nowrap}
+tbody tr:last-child td{border-bottom:1px solid var(--ink)}
+tr.hl td{background:var(--accsoft)}
+tr.fl td{background:var(--warnsoft)}
+td sup{font-size:10px;color:var(--acc);font-weight:700}
+.tag{font:600 10.5px/1 var(--mono);letter-spacing:.05em;padding:3px 6px;border:1px solid var(--line);border-radius:2px;white-space:nowrap;display:inline-block}
+.tag.ok{color:var(--acc);border-color:var(--acc)}
+.tag.no{color:var(--warn);border-color:var(--warn)}
+.sgn{font-family:var(--mono);font-weight:600}
+/* eq */
+.eq{font:italic 17px/1.9 var(--serif);padding:14px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:14px 0 18px;overflow-x:auto;white-space:nowrap}
+.eq i{font-style:italic}.eq sub{font-size:.7em}
+/* flow */
+.flow{list-style:none;margin:10px 0 22px;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;counter-reset:s}
+.flow li{position:relative;padding:34px 14px 0 0;border-top:2px solid var(--ink);font-size:13.5px;line-height:1.45;counter-increment:s}
+.flow li::before{content:"0" counter(s);position:absolute;top:8px;left:0;font:600 11px/1 var(--mono);color:var(--acc)}
+.flow li::after{content:"";position:absolute;top:-6px;left:0;width:10px;height:10px;background:var(--bg);border:2px solid var(--ink);border-radius:50%}
+.flow li.fin{border-color:var(--acc)}.flow li.fin::after{border-color:var(--acc);background:var(--acc)}
+.flow b{display:block;font:600 14px/1.3 var(--sans);margin-bottom:4px}
+.flow span{color:var(--mute);font-size:12.5px}
+/* lists */
+ol.rq{margin:0 0 14px;padding-left:22px;max-width:68ch}ol.rq li{margin-bottom:6px}
+dl.def{margin:0}dl.def dt{font:600 13px/1.4 var(--mono);margin-top:14px}dl.def dd{margin:2px 0 0;color:var(--mute);max-width:66ch}
+.banks{display:grid;grid-template-columns:90px minmax(0,1fr);gap:6px 14px;font-size:13px}
+.banks b{font:600 11px/1.9 var(--mono);color:var(--mute)}
+.banks span{font:500 12px/1.9 var(--mono);display:inline-block;margin-right:9px}
+/* boxes */
+.bx{border:1px solid var(--line);padding:18px 20px;margin:20px 0}
+.bx.w{border-color:var(--warn);background:var(--warnsoft)}
+.bx.a{border-color:var(--acc);background:var(--accsoft)}
+.bx h3{margin-top:0;font-size:16px;font-family:var(--sans)}
+.bx p:last-child{margin-bottom:0}
+.lab{display:inline-block;font:600 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;margin-right:8px;color:var(--bg);background:var(--ink);vertical-align:middle}
+.lab.a{background:var(--acc)}.lab.w{background:var(--warn)}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
+.three>div{border-top:2px solid var(--ink);padding-top:12px}
+.three>div.a{border-color:var(--acc)}.three>div.w{border-color:var(--warn)}
+.heat td{text-align:center;padding:6px 4px;font-size:12.5px;border:1px solid var(--bg)}
+.heat th{padding:6px 4px;text-align:center}
+footer{border-top:1px solid var(--ink);padding:36px 0 60px;font-size:13px;color:var(--mute)}
+footer p{max-width:80ch}
+@media(max-width:900px){
+.cols,.hgrid{grid-template-columns:minmax(0,1fr)}
+.three{grid-template-columns:minmax(0,1fr)}
+.flow{grid-template-columns:minmax(0,1fr);gap:0;border-left:2px solid var(--ink);margin-left:5px}
+.flow li{border-top:0;padding:0 0 18px 22px}.flow li::before{position:static;display:block;margin-bottom:4px}
+.flow li::after{top:2px;left:-8px}
+.facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+.brand{display:none}
+}
+@media(max-width:520px){body{font-size:15.5px}.banks{grid-template-columns:minmax(0,1fr)}th,td{padding-right:9px}}
+
+/* motion */
+body,.bar{transition:background-color .35s,color .35s}
+#pg{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--acc);transform:scaleX(0);transform-origin:0 50%}
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .9s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+.sh{position:relative}
+.sh::after{content:"";flex:1;align-self:center;height:1px;background:var(--line);transform:scaleX(0);transform-origin:0 50%;transition:transform 1.2s cubic-bezier(.2,.7,.2,1) .25s}
+.sh.in::after,html:not(.js) .sh::after{transform:none}
+.js .flow li{border-top-color:var(--line);transition:opacity .8s var(--d,0s),transform .8s var(--d,0s),border-color .6s calc(var(--d,0s) + .25s)}
+.js .flow li.in{border-top-color:var(--ink)}
+.js .flow li.fin.in{border-top-color:var(--acc)}
+.js .flow li::after{transform:scale(0);transition:transform .5s cubic-bezier(.3,1.7,.5,1) calc(var(--d,0s) + .3s)}
+.js .flow li.in::after{transform:scale(1)}
+tbody tr{transition:background-color .2s}
+tbody tr:hover td{background:var(--accsoft)}
+.nav a{transition:color .2s,border-color .25s}
+.js figure svg [class~=an]{animation-duration:.75s;animation-timing-function:cubic-bezier(.2,.7,.2,1);animation-fill-mode:backwards;animation-delay:calc(var(--i,0)*1s);animation-play-state:paused;transform-box:fill-box}
+.js figure.in svg [class~=an]{animation-play-state:running}
+.js figure.done svg [class~=an]{animation:none}
+.an-fade{animation-name:kf-fade}.an-pop{animation-name:kf-pop;transform-origin:center}.an-y{animation-name:kf-y;transform-origin:50% 100%}.an-x{animation-name:kf-x;transform-origin:0 50%}
+.js figure svg .an-draw{animation-name:kf-draw;animation-duration:1.5s;animation-timing-function:ease-in-out}
+figure svg rect.an-y{transition:fill .2s,opacity .2s}
+figure svg rect.an-y:hover{fill:var(--acc);opacity:1}
+figure svg circle{transition:r .15s}
+.js .heat td.hc{animation:kf-fade .6s backwards calc(var(--i,0)*.025s);animation-play-state:paused}
+.js .heat.in td.hc{animation-play-state:running}
+.js .heat.done td.hc{animation:none}
+@keyframes kf-fade{from{opacity:0}}
+@keyframes kf-pop{from{opacity:0;transform:scale(.2)}}
+@keyframes kf-y{from{transform:scaleY(0)}}
+@keyframes kf-x{from{transform:scaleX(0)}}
+@keyframes kf-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.js .tw.rv{transform:translateY(16px) scaleY(.93);transform-origin:50% 0}
+.js .tw.in tbody tr{animation:rowin .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--r,0)*55ms + .15s)}
+@keyframes rowin{from{opacity:0;transform:translateX(-14px)}}
+.js aside.rv{transform:translateX(28px)}
+.js .bx.rv{transform:scale(.965)}
+.js .three>div.rv{transform:translateY(38px)}
+.js h3.rv{transform:translateX(-20px)}
+.js .hgrid>figure.rv{transform:scale(.94) rotate(-.6deg)}
+.js .hgrid h1.rv{transform:translateY(34px) scale(1.02)}
+.js .facts.rv>div{opacity:0;transform:translateY(16px);transition:opacity .7s,transform .7s}
+.js .facts.rv.in>div{opacity:1;transform:none}
+.js .facts.rv.in>div:nth-child(2){transition-delay:.12s}.js .facts.rv.in>div:nth-child(3){transition-delay:.24s}.js .facts.rv.in>div:nth-child(4){transition-delay:.36s}
+.js tr.hl td,.js tr.fl td{background-size:0 100%;background-repeat:no-repeat}
+@media print{.js .rv{opacity:1!important;transform:none!important}.js figure svg [class~=an]{animation:none!important}}
+@media(max-width:900px){.js .flow li{transform:translateX(-10px)}.js .flow li.in{transform:none}}
+@media print{.bar{display:none}section{break-inside:avoid-page}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+<span class="brand">NIM · 2018–2023</span>
+<nav class="nav" aria-label="Sections">
+<a href="#s1">1 <span class="vi">Tổng quan</span><span class="en">Overview</span></a>
+<a href="#s2">2 <span class="vi">Bối cảnh</span><span class="en">Background</span></a>
+<a href="#s3">3 <span class="vi">Dữ liệu</span><span class="en">Dataset</span></a>
+<a href="#s4">4 <span class="vi">Phương pháp</span><span class="en">Method</span></a>
+<a href="#s5">5 <span class="vi">Kết quả</span><span class="en">Findings</span></a>
+<a href="#s6">6 PGBank</a>
+<a href="#s7">7 <span class="vi">Diễn giải</span><span class="en">Interpretation</span></a>
+<a href="#s8">8 <span class="vi">Kết luận</span><span class="en">Conclusion</span></a>
+<a href="#sa">A <span class="vi">Ghi chú</span><span class="en">Notes</span></a>
+</nav>
+<div class="tog"><button id="bl" aria-pressed="false" title="Ngôn ngữ / Language">VI / EN</button><button id="bt" aria-pressed="false" title="Sáng / tối · Light / dark">◐</button></div>
+</div><div id="pg"></div></header>
+
+<main>
+<!-- 1 HERO -->
+<section class="hero" id="s1"><div class="wrap"><div class="hgrid">
+<div>
+<div class="kick"><span class="vi">Báo cáo thực hành nghề nghiệp · Kinh tế lượng ứng dụng trong ngân hàng</span><span class="en">Professional practicum report · Applied econometrics in banking</span></div>
+<h1 style="margin-top:14px"><span class="vi">Các yếu tố tác động đến tỷ lệ lãi cận biên (NIM) của ngân hàng thương mại Việt Nam, 2018–2023</span><span class="en">Determinants of the net interest margin (NIM) of Vietnamese commercial banks, 2018–2023</span></h1>
+<p class="deck vi">Mục tiêu: xác định các yếu tố tác động đến NIM và đánh giá mức độ ảnh hưởng của chúng, trên dữ liệu bảng của 27 ngân hàng thương mại cổ phần niêm yết.</p>
+<p class="deck en">Objective: identify which factors affect NIM and assess how strongly, using panel data on 27 listed joint-stock commercial banks.</p>
+<div class="facts">
+<div><b data-n="27">27</b><span class="vi">ngân hàng TMCP niêm yết</span><span class="en">listed commercial banks</span></div>
+<div><b>2018–23</b><span class="vi">6 năm, dữ liệu năm</span><span class="en">6 annual periods</span></div>
+<div><b data-n="162">162</b><span class="vi">quan sát (27 × 6)</span><span class="en">observations (27 × 6)</span></div>
+<div><b data-n="4">4</b><span class="vi">bộ ước lượng: Pooled OLS, FEM, REM, FGLS</span><span class="en">estimators: Pooled OLS, FEM, REM, FGLS</span></div>
+</div>
+<div class="scope"><span class="vi"><b>Phạm vi kết quả.</b> Các hệ số hồi quy là trung bình trên toàn mẫu 27 ngân hàng. PGBank được tách riêng ở mục 6 và không có hồi quy riêng.</span><span class="en"><b>Scope of results.</b> Regression coefficients are averages over the whole 27-bank sample. PGBank is set apart in section 6 and has no regression of its own.</span></div>
+<div class="by">Lê Nguyễn Quốc Thắng · <span class="vi">Trường Đại học Tài chính – Marketing · 2024</span><span class="en">University of Finance – Marketing · 2024</span></div>
+</div>
+<figure>
+<svg id="fHero" viewBox="0 0 560 330" role="img" aria-label="NIM by year"></svg>
+<figcaption class="cap"><span class="vi">Hình 1. NIM của 162 quan sát theo năm: mỗi chấm một ngân hàng, vạch teal là trung bình mẫu. Nguồn: Phụ lục 13 của báo cáo gốc.</span><span class="en">Figure 1. NIM of the 162 observations by year: one dot per bank, teal bar = sample mean. Source: Appendix 13 of the original report.</span></figcaption>
+</figure>
+</div></div></section>
+
+<!-- 2 BACKGROUND -->
+<section id="s2"><div class="wrap">
+<div class="sh"><span class="sn">02</span><h2><span class="vi">Bối cảnh nghiên cứu</span><span class="en">Research background</span></h2></div>
+<div class="cols">
+<div>
+<div class="vi"><p>NIM đo chênh lệch giữa thu nhập lãi từ các khoản cho vay và chi phí lãi phải trả cho tiền gửi. Báo cáo gốc chọn NIM làm biến phụ thuộc vì đây là chỉ số quan trọng đánh giá hiệu quả hoạt động của ngân hàng: NIM càng cao, khả năng sinh lời từ hoạt động tín dụng càng lớn.</p>
+<p>Đề tài được đặt trong bối cảnh năm 2023: kinh tế Việt Nam tăng trưởng 5,05% và lạm phát 3,25% (số liệu Tạp chí Ngân hàng mà báo cáo gốc trích dẫn), sau đại dịch COVID-19 và các biến động toàn cầu. Trong giai đoạn 2018–2023, NIM trung bình của 162 quan sát là 3,26% nhưng trải từ 0,59% đến 9,43%: chênh lệch đó là câu hỏi cần giải thích.</p></div>
+<div class="en"><p>NIM measures the gap between interest income on loans and interest paid on deposits. The original report uses it as the dependent variable because it is a key gauge of bank performance: the higher the NIM, the greater the profitability of lending.</p>
+<p>The topic is set against 2023: Vietnam’s economy grew 5.05% with inflation at 3.25% (figures from a banking-journal article quoted in the report), after COVID-19 and global shocks. Over 2018–2023 the mean NIM across the 162 observations is 3.26%, but it ranges from 0.59% to 9.43%: that spread is what needs explaining.</p></div>
+<h3><span class="vi">Câu hỏi nghiên cứu</span><span class="en">Research questions</span></h3>
+<ol class="rq vi"><li>Những yếu tố nào ảnh hưởng đến NIM của các NHTM Việt Nam?</li><li>Mức độ tác động của từng yếu tố ra sao?</li><li>Các hàm ý chính sách liên quan đến NIM là gì?</li></ol>
+<ol class="rq en"><li>Which factors affect the NIM of Vietnamese commercial banks?</li><li>How large is the effect of each factor?</li><li>What policy implications follow for NIM?</li></ol>
+<h3><span class="vi">Sáu giả thuyết và dấu kỳ vọng</span><span class="en">Six hypotheses and expected signs</span></h3>
+<div class="tw"><table><thead><tr><th>#</th><th><span class="vi">Biến</span><span class="en">Variable</span></th><th class="n"><span class="vi">Kỳ vọng</span><span class="en">Expected</span></th><th><span class="vi">Phát biểu (báo cáo gốc)</span><span class="en">Statement (original report)</span></th></tr></thead><tbody>
+<tr><td>H1</td><td class="mono">NPL</td><td class="n sgn">−</td><td><span class="vi">Nợ xấu tác động tiêu cực đến NIM</span><span class="en">Non-performing loans reduce NIM</span></td></tr>
+<tr><td>H2</td><td class="mono">SIZE</td><td class="n sgn">+</td><td><span class="vi">Quy mô ngân hàng tác động tích cực</span><span class="en">Bank size raises NIM</span></td></tr>
+<tr><td>H3</td><td class="mono">CAP</td><td class="n sgn">+</td><td><span class="vi">Quy mô vốn chủ sở hữu tác động tích cực</span><span class="en">Equity capitalisation raises NIM</span></td></tr>
+<tr><td>H4</td><td class="mono">INF</td><td class="n sgn">±</td><td><span class="vi">Lạm phát có thể tác động theo cả hai hướng</span><span class="en">Inflation may act in either direction</span></td></tr>
+<tr><td>H5</td><td class="mono">GDP</td><td class="n sgn">−</td><td><span class="vi">Tăng trưởng kinh tế tác động tiêu cực</span><span class="en">Economic growth lowers NIM</span></td></tr>
+<tr><td>H6</td><td class="mono">COVID</td><td class="n sgn">−</td><td><span class="vi">Đại dịch COVID-19 tác động tiêu cực</span><span class="en">The COVID-19 pandemic lowers NIM</span></td></tr>
+</tbody></table></div>
+</div>
+<aside class="note a"><b><span class="vi">Cách đọc báo cáo này</span><span class="en">How to read this report</span></b>
+<span class="vi">Dữ liệu và phương pháp giữ nguyên như báo cáo gốc. Ba loại nội dung được đánh dấu riêng: <i>báo cáo gốc nêu</i>, <i>tính lại từ dữ liệu phụ lục</i>, và <i>ghi chú đối chiếu</i> (Phụ lục A).</span>
+<span class="en">Data and methods are kept as in the original report. Three kinds of content are labelled separately: <i>stated in the original</i>, <i>recomputed from the appendix data</i>, and <i>reconciliation notes</i> (Appendix A).</span></aside>
+</div></div></section>
+
+<!-- 3 DATASET -->
+<section id="s3"><div class="wrap">
+<div class="sh"><span class="sn">03</span><h2><span class="vi">Dữ liệu</span><span class="en">Dataset</span></h2></div>
+<div class="cols">
+<div>
+<div class="vi"><p>Dữ liệu bảng cân bằng gồm 27 ngân hàng TMCP niêm yết (17 trên HOSE, 2 trên HNX, 8 trên UPCoM) qua 6 năm 2018–2023, tổng cộng 162 quan sát. Báo cáo gốc nêu nguồn là báo cáo tài chính của các ngân hàng, World Bank Open Data và bảng giá của CTCP Chứng khoán SSI; báo cáo không chỉ rõ biến nào lấy từ nguồn nào.</p></div>
+<div class="en"><p>A balanced panel of 27 listed commercial banks (17 on HOSE, 2 on HNX, 8 on UPCoM) over 2018–2023, 162 observations in total. The original report cites bank financial statements, World Bank Open Data and the SSI securities price board as sources; it does not say which variable comes from which source.</p></div>
+<h3><span class="vi">Biến và thống kê mô tả (Bảng 4.1 gốc)</span><span class="en">Variables and descriptive statistics (original Table 4.1)</span></h3>
+<div class="tw"><table><thead><tr><th><span class="vi">Biến</span><span class="en">Variable</span></th><th><span class="vi">Vai trò</span><span class="en">Role</span></th><th class="n">Mean</th><th class="n">SD</th><th class="n">Min</th><th class="n">Max</th></tr></thead><tbody>
+<tr><td class="mono">NIM</td><td><span class="vi">Phụ thuộc, %</span><span class="en">Dependent, %</span></td><td class="n">3.259</td><td class="n">1.384</td><td class="n">0.595</td><td class="n">9.426</td></tr>
+<tr><td class="mono">NPL</td><td><span class="vi">Tỷ lệ nợ xấu, %</span><span class="en">NPL ratio, %</span></td><td class="n">2.080</td><td class="n">2.694</td><td class="n">0.000</td><td class="n">29.757</td></tr>
+<tr><td class="mono">SIZE</td><td><span class="vi">Quy mô ngân hàng (thang log; xem N-3)</span><span class="en">Bank size (log scale; see N-3)</span></td><td class="n">47.639</td><td class="n">1.573</td><td class="n">44.212</td><td class="n">51.031</td></tr>
+<tr><td class="mono">CAP</td><td><span class="vi">Quy mô vốn chủ sở hữu, %</span><span class="en">Equity capitalisation, %</span></td><td class="n">8.568</td><td class="n">3.053</td><td class="n">4.155</td><td class="n">17.115</td></tr>
+<tr><td class="mono">INF</td><td><span class="vi">Lạm phát, % (theo năm)</span><span class="en">Inflation, % (by year)</span></td><td class="n">2.983</td><td class="n">0.563</td><td class="n">1.835</td><td class="n">3.540</td></tr>
+<tr><td class="mono">GDP</td><td><span class="vi">Tăng trưởng GDP, % (theo năm)</span><span class="en">GDP growth, % (by year)</span></td><td class="n">5.554</td><td class="n">2.221</td><td class="n">2.562</td><td class="n">8.020</td></tr>
+<tr><td class="mono">COVID</td><td><span class="vi">Biến giả (mã gốc 1 = Có, 2 = Không)</span><span class="en">Dummy (source coding 1 = Yes, 2 = No)</span></td><td class="n">1.333</td><td class="n">0.473</td><td class="n">1</td><td class="n">2</td></tr>
+</tbody></table></div>
+<p class="cap"><span class="vi">Đã đối chiếu: tính lại từ Phụ lục 13 cho đúng các số trên (162 quan sát).</span><span class="en">Checked: recomputing from Appendix 13 reproduces these numbers (162 observations).</span></p>
+
+<h3><span class="vi">Các biến vĩ mô chỉ đổi theo năm</span><span class="en">Macro variables vary by year only</span></h3>
+<div class="tw"><table id="tYear"><thead><tr><th><span class="vi">Năm</span><span class="en">Year</span></th><th class="n">INF %</th><th class="n">GDP %</th><th class="n"><span class="vi">Cờ COVID trong dữ liệu</span><span class="en">COVID flag in data</span></th><th class="n"><span class="vi">NIM TB mẫu</span><span class="en">Mean NIM</span></th></tr></thead><tbody></tbody></table></div>
+<p class="cap"><span class="vi">INF và GDP giống nhau ở mọi ngân hàng trong cùng một năm, nên chỉ có 6 giá trị khác nhau (xem N-10).</span><span class="en">INF and GDP are identical across banks within a year, so they take only 6 distinct values (see N-10).</span></p>
+</div>
+<aside class="note"><b><span class="vi">27 ngân hàng trong mẫu</span><span class="en">The 27 banks</span></b>
+<div class="banks" style="grid-template-columns:1fr">
+<div><b>HOSE · 17</b><br><span>ACB</span><span>BID</span><span>CTG</span><span>EIB</span><span>HDB</span><span>LPB</span><span>MBB</span><span>MSB</span><span>OCB</span><span>SHB</span><span>SSB</span><span>STB</span><span>TCB</span><span>TPB</span><span>VCB</span><span>VIB</span><span>VPB</span></div>
+<div><b>HNX · 2</b><br><span>BAB</span><span>NVB</span></div>
+<div><b>UPCoM · 8</b><br><span>ABB</span><span>BVB</span><span>KLB</span><span>NAB</span><span>PGB</span><span>SGB</span><span>VAB</span><span>VBB</span></div></div></aside>
+
+<div class="full" style="margin-top:18px">
+<h3><span class="vi">NIM trung bình 2018–2023 của từng ngân hàng</span><span class="en">Mean NIM 2018–2023 by bank</span></h3>
+<figure><svg id="fBanks" viewBox="0 0 900 300" role="img" aria-label="Mean NIM by bank"></svg>
+<figcaption class="cap"><span class="vi">Hình 2. Trung bình 6 năm theo ngân hàng, sắp giảm dần; đường nét đứt là trung bình mẫu 3.26%. Tính lại từ Phụ lục 13.</span><span class="en">Figure 2. Six-year mean by bank, sorted descending; dashed line = sample mean 3.26%. Recomputed from Appendix 13.</span></figcaption></figure>
+</div>
+<div class="full" style="margin-top:8px">
+<h3><span class="vi">Ma trận tương quan (Bảng 4.3 gốc)</span><span class="en">Correlation matrix (original Table 4.3)</span></h3>
+<div class="tw"><table class="heat" id="tCorr" style="max-width:640px"></table></div>
+<p class="cap"><span class="vi">Mức cao nhất: NIM–CAP 0.552; INF–COVID 0.584 và INF–GDP 0.505 là các cặp biến độc lập tương quan nhất (trong mã gốc của COVID).</span><span class="en">Highest: NIM–CAP 0.552; INF–COVID 0.584 and INF–GDP 0.505 are the most correlated pairs among regressors (COVID in its source coding).</span></p>
+</div>
+</div></div></section>
+
+<!-- 4 METHOD -->
+<section id="s4"><div class="wrap">
+<div class="sh"><span class="sn">04</span><h2><span class="vi">Phương pháp</span><span class="en">Methodology</span></h2></div>
+<div class="cols">
+<div>
+<div class="eq"><i>NIM</i><sub>it</sub> = β<sub>0</sub> + β<sub>1</sub><i>NPL</i><sub>it</sub> + β<sub>2</sub><i>SIZE</i><sub>it</sub> + β<sub>3</sub><i>CAP</i><sub>it</sub> + β<sub>4</sub><i>INF</i><sub>t</sub> + β<sub>5</sub><i>GDP</i><sub>t</sub> + β<sub>6</sub><i>COVID</i><sub>t</sub> + ε<sub>it</sub></div>
+<p class="vi">i = 1…27 ngân hàng, t = 2018…2023. Phần mềm: Stata 17. Trình tự nghiên cứu theo báo cáo gốc:</p>
+<p class="en">i = 1…27 banks, t = 2018…2023. Software: Stata 17. Research sequence as in the original report:</p>
+<ol class="flow">
+<li><b><span class="vi">Mô tả &amp; tương quan</span><span class="en">Describe &amp; correlate</span></b><span class="vi">Thống kê mô tả, ma trận tương quan</span><span class="en">Descriptives, correlation matrix</span></li>
+<li><b><span class="vi">Ước lượng 3 mô hình</span><span class="en">Estimate 3 models</span></b><span class="vi">Pooled OLS, FEM, REM</span><span class="en">Pooled OLS, FEM, REM</span></li>
+<li><b><span class="vi">Chọn mô hình</span><span class="en">Select a model</span></b><span class="vi">Kiểm định F, Breusch–Pagan LM, Hausman</span><span class="en">F test, Breusch–Pagan LM, Hausman</span></li>
+<li><b><span class="vi">Chẩn đoán</span><span class="en">Diagnose</span></b><span class="vi">VIF, phương sai sai số, Wooldridge, Pesaran</span><span class="en">VIF, heteroskedasticity, Wooldridge, Pesaran</span></li>
+<li class="fin"><b><span class="vi">Khắc phục: FGLS</span><span class="en">Remedy: FGLS</span></b><span class="vi">Mô hình cuối cùng để thảo luận</span><span class="en">Final model for discussion</span></li>
+</ol>
+<dl class="def">
+<dt>Pooled OLS</dt><dd class="vi">Coi mọi ngân hàng như nhau, ước lượng một đường hồi quy chung.</dd><dd class="en">Treats all banks alike and fits one common regression.</dd>
+<dt>FEM</dt><dd class="vi">Mỗi ngân hàng có hệ số chặn riêng, hấp thụ đặc điểm không quan sát được và không đổi theo thời gian.</dd><dd class="en">Each bank gets its own intercept, absorbing unobserved time-invariant traits.</dd>
+<dt>REM</dt><dd class="vi">Coi đặc điểm riêng của ngân hàng là thành phần sai số ngẫu nhiên, giả định không tương quan với biến giải thích.</dd><dd class="en">Treats bank-specific traits as a random error component, assumed uncorrelated with the regressors.</dd>
+<dt>FGLS</dt><dd class="vi">Bình phương tối thiểu tổng quát khả thi, dùng khi kiểm định cho thấy phương sai sai số thay đổi và tự tương quan. Báo cáo gốc không nêu tuỳ chọn ước lượng (N-9).</dd><dd class="en">Feasible generalised least squares, used when tests show heteroskedasticity and autocorrelation. The original report does not state the estimation options (N-9).</dd>
+</dl>
+</div>
+<aside class="note"><b><span class="vi">Bộ kiểm định</span><span class="en">Test battery</span></b>
+<span class="vi"><b style="display:inline;font-size:inherit;letter-spacing:0;text-transform:none;font-family:var(--sans)">Chọn mô hình.</b> F: Pooled so với FEM. Breusch–Pagan LM: Pooled so với REM. Hausman: FEM so với REM.<br><br><b style="display:inline;font-size:inherit;letter-spacing:0;text-transform:none;font-family:var(--sans)">Chẩn đoán.</b> VIF cho đa cộng tuyến; phương sai sai số thay đổi; Wooldridge cho tự tương quan; Pesaran cho tương quan phần dư giữa các đơn vị chéo. Quy tắc: p &lt; 0.05 thì bác bỏ H₀.</span>
+<span class="en"><b style="display:inline;font-size:inherit;letter-spacing:0;text-transform:none;font-family:var(--sans)">Selection.</b> F: Pooled vs FEM. Breusch–Pagan LM: Pooled vs REM. Hausman: FEM vs REM.<br><br><b style="display:inline;font-size:inherit;letter-spacing:0;text-transform:none;font-family:var(--sans)">Diagnostics.</b> VIF for multicollinearity; heteroskedasticity; Wooldridge for autocorrelation; Pesaran for cross-sectional residual dependence. Rule: p &lt; 0.05 rejects H₀.</span></aside>
+</div></div></section>
+
+<!-- 5 FINDINGS -->
+<section id="s5"><div class="wrap">
+<div class="sh"><span class="sn">05</span><h2><span class="vi">Kết quả thực nghiệm</span><span class="en">Empirical findings</span></h2></div>
+<div class="cols">
+<div>
+<h3 style="margin-top:0"><span class="vi">5.1 Ba mô hình và kiểm định lựa chọn (Bảng 4.4 gốc)</span><span class="en">5.1 Three models and selection tests (original Table 4.4)</span></h3>
+<div class="tw"><table><thead><tr><th rowspan="2"><span class="vi">Biến</span><span class="en">Variable</span></th><th colspan="2" class="n" style="text-align:center">Pooled OLS</th><th colspan="2" class="n" style="text-align:center">FEM</th><th colspan="2" class="n" style="text-align:center">REM</th></tr><tr><th class="n">Coef.</th><th class="n">p</th><th class="n">Coef.</th><th class="n">p</th><th class="n">Coef.</th><th class="n">p</th></tr></thead><tbody>
+<tr><td class="mono">CAP</td><td class="n">0.26955<sup>***</sup></td><td class="n">0.000</td><td class="n">0.04572</td><td class="n">0.212</td><td class="n">0.10609<sup>***</sup></td><td class="n">0.001</td></tr>
+<tr class="fl"><td class="mono">SIZE ‡</td><td class="n">0.00376<sup>***</sup></td><td class="n">0.000</td><td class="n">0.00263<sup>**</sup></td><td class="n">0.018</td><td class="n">0.00261<sup>***</sup></td><td class="n">0.001</td></tr>
+<tr><td class="mono">NPL</td><td class="n">−0.01063</td><td class="n">0.722</td><td class="n">−0.05447<sup>***</sup></td><td class="n">0.002</td><td class="n">−0.05450<sup>***</sup></td><td class="n">0.002</td></tr>
+<tr><td class="mono">INF</td><td class="n">−0.05381</td><td class="n">0.785</td><td class="n">−0.07495</td><td class="n">0.409</td><td class="n">−0.06857</td><td class="n">0.468</td></tr>
+<tr><td class="mono">GDP</td><td class="n">0.04443</td><td class="n">0.286</td><td class="n">0.04457<sup>**</sup></td><td class="n">0.025</td><td class="n">0.04303<sup>**</sup></td><td class="n">0.033</td></tr>
+<tr class="fl"><td class="mono">COVID ‡ †</td><td class="n">−0.00188</td><td class="n">0.367</td><td class="n">−0.00149</td><td class="n">0.123</td><td class="n">−0.00152</td><td class="n">0.127</td></tr>
+</tbody></table></div>
+<p class="cap"><span class="vi">Như bản in; * / ** / *** = 10% / 5% / 1%. ‡ SIZE và COVID in ở thang nhỏ hơn khoảng 100 lần so với khi tính lại (N-3). † dấu COVID đảo do mã hoá Có = 1, Không = 2 (N-1).</span><span class="en">As printed; * / ** / *** = 10% / 5% / 1%. ‡ SIZE and COVID are printed about 100× smaller than when recomputed (N-3). † COVID sign inverted by the Yes = 1, No = 2 coding (N-1).</span></p>
+
+<div class="tw" style="margin-top:20px"><table><thead><tr><th><span class="vi">Kiểm định</span><span class="en">Test</span></th><th class="n">p</th><th><span class="vi">Kết luận theo quy tắc p &lt; 0.05</span><span class="en">Reading under p &lt; 0.05</span></th></tr></thead><tbody>
+<tr><td>F (Pooled vs FEM)</td><td class="n">0.0002</td><td><span class="vi">Có hiệu ứng ngân hàng: ưu tiên FEM hơn Pooled</span><span class="en">Bank effects present: FEM preferred to Pooled</span></td></tr>
+<tr><td>Breusch–Pagan LM</td><td class="n">0.000</td><td><span class="vi">Ưu tiên REM hơn Pooled</span><span class="en">REM preferred to Pooled</span></td></tr>
+<tr><td>Hausman (FEM vs REM)</td><td class="n">0.0036</td><td><span class="vi">Bác bỏ H₀: chọn FEM</span><span class="en">H₀ rejected: FEM chosen</span></td></tr>
+<tr><td>VIF</td><td class="n">1.32 (TB)</td><td><span class="vi">Không có đa cộng tuyến (&lt; 2)</span><span class="en">No multicollinearity (&lt; 2)</span></td></tr>
+<tr><td><span class="vi">Phương sai sai số thay đổi</span><span class="en">Heteroskedasticity</span></td><td class="n">0.000</td><td><span class="vi">Có vi phạm</span><span class="en">Violation present</span></td></tr>
+<tr><td><span class="vi">Tự tương quan (Wooldridge)</span><span class="en">Autocorrelation (Wooldridge)</span></td><td class="n">0.0009</td><td><span class="vi">Có vi phạm</span><span class="en">Violation present</span></td></tr>
+<tr><td><span class="vi">Tương quan phần dư đơn vị chéo (Pesaran)</span><span class="en">Cross-sectional dependence (Pesaran)</span></td><td class="n">0.0092</td><td><span class="vi">Có vi phạm</span><span class="en">Violation present</span></td></tr>
+</tbody></table></div>
+<p class="cap"><span class="vi">Cả ba vi phạm đều có p &lt; 0.05; lời văn gốc ở mục 4.1.3–4.1.4 phát biểu ngược lại cho tự tương quan và tương quan phần dư (N-6).</span><span class="en">All three violations have p &lt; 0.05; the original prose in 4.1.3–4.1.4 states the opposite for autocorrelation and cross-sectional dependence (N-6).</span></p>
+
+<h3><span class="vi">5.2 Mô hình cuối: FGLS (Bảng 4.5 gốc)</span><span class="en">5.2 Final model: FGLS (original Table 4.5)</span></h3>
+<div class="tw"><table><thead><tr><th><span class="vi">Biến</span><span class="en">Variable</span></th><th class="n">Coef.</th><th class="n">SE</th><th class="n">z</th><th class="n">p</th><th class="n">β* <span class="mono">(derived)</span></th></tr></thead><tbody>
+<tr class="hl"><td class="mono">CAP</td><td class="n">0.18461<sup>***</sup></td><td class="n">0.02616</td><td class="n">7.06</td><td class="n">0.000</td><td class="n">+0.407</td></tr>
+<tr class="hl"><td class="mono">SIZE ‡</td><td class="n">0.29384<sup>***</sup></td><td class="n">0.04734</td><td class="n">6.21</td><td class="n">0.000</td><td class="n">+0.334</td></tr>
+<tr class="hl"><td class="mono">NPL</td><td class="n">−0.05226<sup>***</sup></td><td class="n">0.01219</td><td class="n">−4.29</td><td class="n">0.000</td><td class="n">−0.102</td></tr>
+<tr><td class="mono">INF</td><td class="n">−0.05298</td><td class="n">0.04594</td><td class="n">−1.15</td><td class="n">0.249</td><td class="n">−0.022</td></tr>
+<tr class="hl"><td class="mono">GDP</td><td class="n">0.03122<sup>**</sup></td><td class="n">0.01216</td><td class="n">2.57</td><td class="n">0.010</td><td class="n">+0.050</td></tr>
+<tr class="fl"><td class="mono">COVID †</td><td class="n">−0.12838<sup>**</sup> <span class="mute">(+0.12838 sau sửa / corrected)</span></td><td class="n">0.06377</td><td class="n">−2.01</td><td class="n">0.044</td><td class="n">+0.044</td></tr>
+</tbody></table></div>
+<p class="cap"><span class="vi">β* = hệ số × SD(x) / SD(NIM), tôi tính từ Bảng 4.1 và 4.5 (không có trong báo cáo gốc) để so sánh độ lớn giữa các biến; β* của SIZE phụ thuộc thang đo (N-3). Sau khi đảo dấu COVID, p và mọi hệ số khác không đổi.</span><span class="en">β* = coefficient × SD(x) / SD(NIM), derived by me from Tables 4.1 and 4.5 (not in the original report) to compare magnitudes; the SIZE β* depends on its scale (N-3). Flipping the COVID sign leaves its p-value and every other coefficient unchanged.</span></p>
+<figure style="margin-top:18px"><svg id="fForest" viewBox="0 0 760 280" role="img" aria-label="FGLS coefficients with 95% intervals"></svg>
+<figcaption class="cap"><span class="vi">Hình 3. Hệ số FGLS ± 1.96 SE (khoảng tin cậy xấp xỉ 95%). Đơn vị mỗi biến khác nhau nên so độ lớn qua β*, không qua hệ số thô. COVID vẽ sau khi đảo dấu; ○ = vị trí theo bản in.</span><span class="en">Figure 3. FGLS coefficients ± 1.96 SE (approximate 95% interval). Units differ by variable, so compare magnitudes through β*, not raw coefficients. COVID is drawn after the sign correction; ○ = printed position.</span></figcaption></figure>
+</div>
+<aside class="note"><b><span class="vi">Đọc kết quả</span><span class="en">Reading the result</span></b>
+<span class="vi">Khác biệt giữa các mô hình có ý nghĩa: CAP không có ý nghĩa trong FEM (p = 0.212) nhưng có ý nghĩa trong Pooled, REM và FGLS; NPL chỉ có ý nghĩa khi có hiệu ứng ngân hàng hoặc FGLS. Điều này cho thấy kết luận phụ thuộc vào việc mô hình kiểm soát khác biệt giữa các ngân hàng đến đâu.</span>
+<span class="en">The differences across models matter: CAP is not significant in FEM (p = 0.212) but is in Pooled, REM and FGLS; NPL is significant only with bank effects or FGLS. Conclusions therefore depend on how far the model controls for differences between banks.</span></aside>
+
+<div class="full">
+<h3><span class="vi">5.3 Ý nghĩa thống kê và ý nghĩa kinh tế (FGLS, mức 5%)</span><span class="en">5.3 Statistical and economic meaning (FGLS, 5% level)</span></h3>
+<div class="tw"><table><thead><tr><th><span class="vi">Biến</span><span class="en">Variable</span></th><th><span class="vi">Có ý nghĩa 5%</span><span class="en">Significant 5%</span></th><th class="n"><span class="vi">Kỳ vọng</span><span class="en">Expected</span></th><th class="n"><span class="vi">Kết quả</span><span class="en">Result</span></th><th><span class="vi">Ý nghĩa kinh tế (các yếu tố khác giữ nguyên; liên hệ, không phải nhân quả)</span><span class="en">Economic meaning (others held fixed; association, not causation)</span></th></tr></thead><tbody>
+<tr><td class="mono">CAP</td><td><span class="tag ok">YES</span></td><td class="n sgn">+</td><td class="n sgn">+</td><td><span class="vi">Vốn chủ/tổng tài sản cao hơn 1 điểm % đi cùng NIM cao hơn khoảng 0.18 điểm %. Phù hợp H3.</span><span class="en">1 pp higher equity capitalisation goes with NIM about 0.18 pp higher. Consistent with H3.</span></td></tr>
+<tr><td class="mono">SIZE</td><td><span class="tag ok">YES</span></td><td class="n sgn">+</td><td class="n sgn">+</td><td><span class="vi">Thêm 1 đơn vị trên thang SIZE đi cùng NIM cao hơn khoảng 0.29 điểm %. Phù hợp H2, nhưng cỡ hệ số phụ thuộc thang đo SIZE (N-3).</span><span class="en">1 unit more on the SIZE scale goes with NIM about 0.29 pp higher. Consistent with H2, but the magnitude depends on the SIZE scale (N-3).</span></td></tr>
+<tr><td class="mono">NPL</td><td><span class="tag ok">YES</span></td><td class="n sgn">−</td><td class="n sgn">−</td><td><span class="vi">Nợ xấu cao hơn 1 điểm % đi cùng NIM thấp hơn khoảng 0.05 điểm %. Phù hợp H1; tác động nhỏ so với biên độ NIM.</span><span class="en">1 pp higher NPL goes with NIM about 0.05 pp lower. Consistent with H1; small relative to the spread of NIM.</span></td></tr>
+<tr><td class="mono">INF</td><td><span class="tag">NO</span></td><td class="n sgn">±</td><td class="n sgn">n.s.</td><td><span class="vi">Không có bằng chứng về quan hệ với NIM (p = 0.249).</span><span class="en">No evidence of a relationship with NIM (p = 0.249).</span></td></tr>
+<tr><td class="mono">GDP</td><td><span class="tag ok">YES</span></td><td class="n sgn">−</td><td class="n sgn">+</td><td><span class="vi">Tăng trưởng cao hơn 1 điểm % đi cùng NIM cao hơn khoảng 0.03 điểm %. <b>Trái H5.</b> GDP chỉ có 6 giá trị (N-10).</span><span class="en">1 pp higher growth goes with NIM about 0.03 pp higher. <b>Contrary to H5.</b> GDP has only 6 values (N-10).</span></td></tr>
+<tr><td class="mono">COVID</td><td><span class="tag ok">YES</span></td><td class="n sgn">−</td><td class="n sgn">+</td><td><span class="vi">Sau khi sửa dấu, các năm được gắn cờ COVID đi cùng NIM cao hơn khoảng 0.13 điểm %. <b>Trái H6</b>; báo cáo gốc in dấu âm và kết luận ngược lại (N-1).</span><span class="en">After the sign correction, years flagged COVID go with NIM about 0.13 pp higher. <b>Contrary to H6</b>; the original prints a negative sign and concludes the opposite (N-1).</span></td></tr>
+</tbody></table></div>
+</div>
+</div></div></section>
+
+<!-- 6 PGBANK -->
+<section id="s6"><div class="wrap">
+<div class="sh"><span class="sn">06</span><h2>PGBank</h2></div>
+<div class="bx w"><p><span class="vi"><b>Ranh giới phân tích.</b> Báo cáo không có hồi quy riêng cho PGBank. Mọi hệ số ở mục 5 là trung bình của 27 ngân hàng và không được đọc thành kết quả của PGBank. Phần dưới đây tách thành ba nguồn rõ ràng.</span><span class="en"><b>Analytical boundary.</b> The report contains no PGBank-specific regression. Every coefficient in section 5 is an average over 27 banks and must not be read as PGBank’s own result. Below, three sources are kept apart.</span></p></div>
+<div class="three" style="margin-top:26px">
+<div class="a"><span class="lab a"><span class="vi">Báo cáo gốc nêu</span><span class="en">Stated in the report</span></span>
+<div class="vi"><p style="margin-top:12px">Chương 1 giới thiệu PGBank: thành lập 13/11/1993 với tên Ngân hàng Nông thôn Đồng Tháp Mười, vốn điều lệ ban đầu 700 triệu đồng; năm 2007 đổi tên thành Ngân hàng Xăng dầu Petrolimex; tháng 12/2023 đổi nhận diện và tên thành Ngân hàng TMCP Thịnh Vượng và Phát triển. Ngân hàng niêm yết trên UPCoM với mã PGB.</p><p>Trang xác nhận của báo cáo ghi PGBank – CN Sài Gòn là đơn vị thực tập; phần nhận xét của đơn vị để trống. Báo cáo không mô tả nhiệm vụ hay đóng góp cá nhân tại đơn vị.</p></div>
+<div class="en"><p style="margin-top:12px">Chapter 1 profiles PGBank: founded 13/11/1993 as Đồng Tháp Mười Rural Bank with initial charter capital of VND 700 million; renamed Petrolimex Petroleum Commercial Bank in 2007; rebranded in December 2023 as Prosperity and Development Commercial Bank. It is listed on UPCoM as PGB.</p><p>The report’s endorsement page names PGBank – Saigon Branch as the internship unit; the unit’s comment section is blank. The report describes no personal tasks or contributions there.</p></div></div>
+<div class="a" style="grid-column:span 2"><span class="lab"><span class="vi">Tính lại từ phụ lục dữ liệu · mô tả</span><span class="en">Recomputed from appendix data · descriptive</span></span>
+<figure style="margin-top:14px"><svg id="fPgb" viewBox="0 0 640 300" role="img" aria-label="PGBank NIM versus sample mean"></svg>
+<figcaption class="cap"><span class="vi">Hình 4. NIM của PGB so với trung bình 27 ngân hàng, theo năm. Cột nhãn là thứ hạng NIM của PGB trong năm (1 = cao nhất, trên 27).</span><span class="en">Figure 4. PGB’s NIM versus the 27-bank mean, by year. Labels show PGB’s NIM rank that year (1 = highest, out of 27).</span></figcaption></figure>
+<div class="tw"><table id="tPgb"><thead><tr><th><span class="vi">TB 2018–2023</span><span class="en">Mean 2018–2023</span></th><th class="n">PGB</th><th class="n"><span class="vi">Mẫu 27</span><span class="en">Sample</span></th><th class="n"><span class="vi">Hạng PGB / 27</span><span class="en">PGB rank / 27</span></th></tr></thead><tbody></tbody></table></div>
+<p class="cap"><span class="vi">Hạng 1 = giá trị cao nhất; riêng NPL, hạng 3 nghĩa là NPL cao thứ ba. Chỉ mô tả vị trí; không thể quy cho nguyên nhân nào bằng mô hình ở mục 5.</span><span class="en">Rank 1 = highest value; for NPL, rank 3 means the third-highest NPL. Position only; the section 5 models cannot attribute it to any cause.</span></p>
+</div></div>
+<div class="bx" style="margin-top:28px"><p><span class="vi"><b>Đọc đúng phạm vi.</b> PGB có NIM trung bình thấp hơn mẫu, quy mô (SIZE) thuộc nhóm nhỏ nhất và vốn chủ sở hữu (CAP) thuộc nhóm cao. Hệ số của CAP và SIZE ở mục 5 đều dương nhưng là quan hệ trung bình của toàn mẫu: chúng không cho biết PGBank “nên” có NIM bao nhiêu, và báo cáo không kiểm tra điều đó. NIM năm 2021 của PGB (2.00%) là thấp nhất trong chuỗi 6 năm của ngân hàng này; báo cáo không giải thích điểm này.</span><span class="en"><b>Reading within scope.</b> PGB has a lower mean NIM than the sample, sits among the smallest banks by SIZE and among the higher ones by CAP. The CAP and SIZE coefficients in section 5 are both positive, but they are sample-wide averages: they do not say what NIM PGBank “should” have, and the report does not test that. PGB’s 2021 NIM (2.00%) is the lowest in its own six-year series; the report does not explain this point.</span></p></div>
+</div></section>
+
+<!-- 7 INTERPRETATION -->
+<section id="s7"><div class="wrap">
+<div class="sh"><span class="sn">07</span><h2><span class="vi">Diễn giải trong bối cảnh ngân hàng</span><span class="en">Practical interpretation</span></h2></div>
+<div class="cols">
+<div>
+<div class="vi">
+<p><b>Vốn chủ sở hữu và NIM.</b> CAP đi cùng NIM cao hơn trong Pooled, REM và FGLS nhưng không có ý nghĩa trong FEM. Nói cách khác, khác biệt NIM <i>giữa</i> các ngân hàng gắn với khác biệt về vốn chủ nhiều hơn là thay đổi vốn chủ <i>trong từng</i> ngân hàng qua 6 năm (gợi ý, chưa kiểm tra riêng).</p>
+<p><b>Chất lượng tín dụng.</b> NPL có dấu âm, ổn định giữa FEM, REM và FGLS (p ≈ 0.002 trở xuống), nhưng hệ số nhỏ: mỗi điểm % nợ xấu đi cùng NIM thấp hơn chỉ khoảng 0.05 điểm %. Mẫu có giá trị ngoại lệ (NVB đạt 17.9% năm 2022 và 29.8% năm 2023), nên cần thận trọng khi đọc độ lớn.</p>
+<p><b>Vĩ mô.</b> GDP dương, trái kỳ vọng, và INF không có ý nghĩa. Vì hai biến này chỉ có 6 giá trị (mỗi năm một giá trị), mẫu hiệu dụng về vĩ mô nhỏ hơn nhiều so với 162 quan sát: nên xem đây là mô tả hơn là ước lượng chính xác.</p>
+<p><b>COVID-19.</b> Sau khi sửa dấu, các năm được gắn cờ COVID có NIM cao hơn: trung bình mẫu 3.32% so với 3.14% ở các năm còn lại (tính từ Phụ lục 13), khớp với hệ số FGLS dương. Báo cáo gốc không kiểm tra nguyên nhân.</p></div>
+<div class="en">
+<p><b>Equity and NIM.</b> CAP goes with higher NIM in Pooled, REM and FGLS but is not significant in FEM. Put differently, NIM differences <i>between</i> banks track equity differences more than equity changes <i>within</i> a bank over six years (a hint, not separately tested).</p>
+<p><b>Credit quality.</b> NPL is negative and stable across FEM, REM and FGLS (p ≈ 0.002 or below), but the coefficient is small: each percentage point of bad loans goes with NIM only about 0.05 pp lower. The sample has outliers (NVB reaches 17.9% in 2022 and 29.8% in 2023), so magnitudes should be read with care.</p>
+<p><b>Macro.</b> GDP is positive, contrary to expectation, and INF is not significant. Because both take only 6 values (one per year), the effective macro sample is far smaller than 162 observations: treat this as descriptive rather than a precise estimate.</p>
+<p><b>COVID-19.</b> After the sign correction, years flagged COVID show higher NIM: sample mean 3.32% versus 3.14% in the other years (computed from Appendix 13), in line with the positive FGLS coefficient. The original report does not test why.</p></div>
+<div class="bx"><h3><span class="vi">Hàm ý chính sách do báo cáo gốc nêu (của tác giả, không phải kết quả kiểm định)</span><span class="en">Policy implications stated by the original report (the author’s, not tested results)</span></h3>
+<p class="vi">Báo cáo đề xuất: tối ưu quy mô và vốn chủ sở hữu (giữ lại lợi nhuận, phát hành cổ phiếu có cân nhắc), theo dõi tăng trưởng kinh tế khi mở rộng tín dụng, và quản trị chặt nợ xấu cùng rủi ro từ các cú sốc bên ngoài. Các đề xuất này dựa trên dấu của hệ số; báo cáo này không bổ sung khuyến nghị kinh doanh nào khác.</p>
+<p class="en">The report proposes: optimising size and equity (retained earnings, careful share issuance), monitoring economic growth when expanding credit, and tight management of bad debt and external shocks. These rest on the signs of the coefficients; this report adds no further business recommendations.</p></div>
+</div>
+<aside class="note w"><b><span class="vi">Giới hạn khi diễn giải</span><span class="en">Interpretation limits</span></b>
+<span class="vi">Đây là liên hệ thống kê trên dữ liệu bảng ngắn, không có biến công cụ hay thiết kế nhân quả. Hai điểm cần lưu ý nhất: dấu COVID (N-1) và thang đo của SIZE (N-3).</span>
+<span class="en">These are statistical associations on a short panel, with no instrument or causal design. The two most important caveats: the COVID sign (N-1) and the scale of SIZE (N-3).</span></aside>
+</div></div></section>
+
+<!-- 8 CONCLUSION -->
+<section id="s8"><div class="wrap">
+<div class="sh"><span class="sn">08</span><h2><span class="vi">Kết luận và giới hạn</span><span class="en">Conclusion and limitations</span></h2></div>
+<div class="cols">
+<div>
+<div class="vi"><p>Trên 162 quan sát của 27 ngân hàng giai đoạn 2018–2023, mô hình cuối (FGLS) cho thấy ở mức 5%: quy mô vốn chủ sở hữu (CAP), quy mô ngân hàng (SIZE) và tăng trưởng GDP đi cùng NIM cao hơn; nợ xấu (NPL) đi cùng NIM thấp hơn; lạm phát không có ý nghĩa. Biến COVID có ý nghĩa nhưng dấu đúng là dương, nên giả thuyết H6 (tác động tiêu cực) không được ủng hộ; kết quả GDP cũng trái kỳ vọng H5.</p></div>
+<div class="en"><p>On 162 observations of 27 banks over 2018–2023, the final model (FGLS) shows at the 5% level that equity capitalisation (CAP), bank size (SIZE) and GDP growth go with higher NIM; non-performing loans (NPL) go with lower NIM; inflation is not significant. The COVID variable is significant but its correct sign is positive, so H6 (negative effect) is not supported; the GDP result is also contrary to H5.</p></div>
+<h3><span class="vi">Giới hạn báo cáo gốc nêu</span><span class="en">Limitations stated in the original report</span></h3>
+<ol class="rq vi"><li>Dữ liệu công bố thiếu và đến từ nhiều nguồn nên có thể không đồng nhất.</li><li>Mẫu chỉ có 27 trong 33 ngân hàng TMCP, thời gian ngắn (2018–2023), loại ngân hàng nước ngoài và liên doanh.</li><li>Các yếu tố vĩ mô như chính sách và sự kiện lớn chưa được đưa vào đầy đủ.</li><li>Tác động của COVID-19 chưa được đo đầy đủ do thiếu dữ liệu lịch sử dài hạn.</li></ol>
+<ol class="rq en"><li>Public disclosure is patchy and comes from several sources, so data may be inconsistent.</li><li>Only 27 of 33 commercial banks and a short window (2018–2023); foreign and joint-venture banks are excluded.</li><li>Macro factors such as policy and major events are not fully included.</li><li>The effect of COVID-19 is not fully measured given the lack of long historical data.</li></ol>
+<h3><span class="vi">Giới hạn bổ sung khi rà soát lại</span><span class="en">Additional limits found on review</span></h3>
+<ol class="rq vi"><li>Mô hình cuối FGLS không chứa hiệu ứng riêng của từng ngân hàng, trong khi kiểm định F và Hausman ưu tiên FEM (N-9).</li><li>INF, GDP và COVID chỉ có 6 giá trị khác nhau, nên suy luận về chúng mong manh (N-10).</li><li>Các bước đối chiếu số liệu bản in với dữ liệu phụ lục được ghi ở Phụ lục A.</li></ol>
+<ol class="rq en"><li>The final FGLS model carries no bank-specific effects, while the F and Hausman tests favour FEM (N-9).</li><li>INF, GDP and COVID take only 6 distinct values, so inference on them is fragile (N-10).</li><li>The steps reconciling printed figures with the appendix data are recorded in Appendix A.</li></ol>
+</div>
+<aside class="note a"><b><span class="vi">Năng lực thể hiện</span><span class="en">Skills shown</span></b>
+<span class="vi">Dựng và kiểm tra bộ dữ liệu bảng; chọn mô hình bằng chuỗi kiểm định; xử lý vi phạm bằng FGLS; đối chiếu số liệu bản in với tính toán lại; phân tách kết quả toàn mẫu với quan sát riêng về một ngân hàng.</span>
+<span class="en">Building and checking a panel dataset; selecting a model through a test sequence; remedying violations with FGLS; reconciling printed numbers with recomputation; separating sample-wide results from observations on a single bank.</span></aside>
+</div></div></section>
+
+<!-- APPENDIX A -->
+<section id="sa"><div class="wrap">
+<div class="sh"><span class="sn">A</span><h2><span class="vi">Phụ lục A · Đối chiếu số liệu và ghi chú phương pháp</span><span class="en">Appendix A · Data reconciliation and method notes</span></h2></div>
+<p class="vi">Khi dựng lại bảng từ dữ liệu phụ lục, các số liệu bản in được đối chiếu từng điểm. Bảng dưới ghi lại phát hiện và cách báo cáo này xử lý, để người đọc theo dõi được từ số in đến số dùng.</p>
+<p class="en">When the tables were rebuilt from the appendix data, each printed figure was reconciled. The table records what was found and how this report handles it, so a reader can trace printed numbers to the ones used.</p>
+<div class="tw"><table><thead><tr><th>ID</th><th><span class="vi">Điểm đối chiếu</span><span class="en">Item</span></th><th><span class="vi">Phát hiện</span><span class="en">Finding</span></th><th><span class="vi">Cách xử lý trong báo cáo này</span><span class="en">Handling in this report</span></th></tr></thead><tbody>
+<tr class="fl"><td class="mono">N-1</td><td><span class="vi">Dấu của biến COVID</span><span class="en">Sign of the COVID variable</span></td><td><span class="vi">Biến mã Có = 1, Không = 2 (trung bình 1.333 = 2/3 số năm có cờ, Phụ lục 13); Stata gán mã theo thứ tự chữ cái.</span><span class="en">Variable coded Yes = 1, No = 2 (mean 1.333 = 2/3 of years flagged, Appendix 13); Stata assigns codes alphabetically.</span></td><td><span class="vi">Hệ số FGLS in −0.128 được đọc là +0.128; p-value và các hệ số khác không đổi. H6 không được ủng hộ.</span><span class="en">The printed FGLS −0.128 is read as +0.128; its p-value and all other coefficients are unchanged. H6 is not supported.</span></td></tr>
+<tr><td class="mono">N-2</td><td><span class="vi">Cửa sổ COVID trong dữ liệu</span><span class="en">COVID window in the data</span></td><td><span class="vi">Dữ liệu gắn cờ 2019–2022 (4 năm).</span><span class="en">The data flags 2019–2022 (4 years).</span></td><td><span class="vi">Giữ cờ như dữ liệu gốc; độ nhạy với cửa sổ 2020–2022 nằm ở Phụ lục B.</span><span class="en">The flag is kept as in the source data; sensitivity to a 2020–2022 window is in Appendix B.</span></td></tr>
+<tr><td class="mono">N-3</td><td><span class="vi">Thang đo SIZE và COVID ở Bảng 4.4</span><span class="en">Scale of SIZE and COVID in Table 4.4</span></td><td><span class="vi">Hệ số in nhỏ hơn khoảng 100 lần so với khi tính lại từ dữ liệu (SIZE Pooled 0.00376 so với 0.3765; COVID Pooled −0.00188 so với −0.1879). Bảng FGLS dùng đúng thang.</span><span class="en">Printed coefficients are about 100× smaller than recomputed from the data (Pooled SIZE 0.00376 vs 0.3765; COVID −0.00188 vs −0.1879). The FGLS table is on the right scale.</span></td><td><span class="vi">Bảng 4.4 được trình bày như bản in; kết luận dựa trên p-value và Bảng FGLS. SIZE là thang logarit, không phải tỷ lệ %.</span><span class="en">Table 4.4 is shown as printed; conclusions rest on p-values and the FGLS table. SIZE is a log scale, not a percentage.</span></td></tr>
+<tr><td class="mono">N-4</td><td><span class="vi">Lạm phát trung bình</span><span class="en">Mean inflation</span></td><td><span class="vi">Một câu trong văn bản nêu 3.25885%, trùng với NIM trung bình; Bảng 4.1 và dữ liệu cho INF trung bình 2.983%.</span><span class="en">One sentence in the text gives 3.25885%, which equals the mean NIM; Table 4.1 and the data give mean INF 2.983%.</span></td><td><span class="vi">Báo cáo này dùng 2.983%.</span><span class="en">This report uses 2.983%.</span></td></tr>
+<tr><td class="mono">N-5</td><td><span class="vi">Chiều đọc hệ số</span><span class="en">Direction of reading coefficients</span></td><td><span class="vi">Mục 4.2 gốc viết “NIM tăng 1% thì CAP tăng 0.1846%”, ngược với mô hình (NIM là biến phụ thuộc).</span><span class="en">Original section 4.2 reads “if NIM rises 1% then CAP rises 0.1846%”, the reverse of the model (NIM is dependent).</span></td><td><span class="vi">Báo cáo này đọc theo chiều đúng: khi biến giải thích tăng thì NIM thay đổi.</span><span class="en">This report reads it the right way round: when the regressor rises, NIM changes.</span></td></tr>
+<tr><td class="mono">N-6</td><td><span class="vi">Kết luận các kiểm định chẩn đoán</span><span class="en">Reading of the diagnostic tests</span></td><td><span class="vi">Phương sai sai số thay đổi, tự tương quan (p = 0.0009) và tương quan phần dư (p = 0.0092) đều có p &lt; 0.05; lời văn gốc ở hai kiểm định sau nói ngược lại.</span><span class="en">Heteroskedasticity, autocorrelation (p = 0.0009) and cross-sectional dependence (p = 0.0092) all have p &lt; 0.05; the original prose says the opposite for the last two.</span></td><td><span class="vi">Bảng ở mục 5.1 đọc theo số liệu: cả ba vi phạm đều tồn tại, nên dùng FGLS là hợp lý.</span><span class="en">The table in 5.1 is read from the numbers: all three violations exist, so FGLS is justified.</span></td></tr>
+<tr><td class="mono">N-7</td><td><span class="vi">NPL bằng 0</span><span class="en">Zero NPL values</span></td><td><span class="vi">3 giá trị 0: BVB 2018, VAB 2018, VAB 2019, có vẻ là dữ liệu không công bố được mã 0.</span><span class="en">3 zeros: BVB 2018, VAB 2018, VAB 2019, which look like undisclosed values coded 0.</span></td><td><span class="vi">Giữ nguyên như báo cáo gốc; kết quả NPL được đọc với lưu ý này.</span><span class="en">Kept as in the original; the NPL result is read with this caveat.</span></td></tr>
+<tr><td class="mono">N-8</td><td><span class="vi">Định nghĩa biến</span><span class="en">Variable definitions</span></td><td><span class="vi">Báo cáo gốc không nêu mẫu số của NIM hay công thức SIZE, CAP.</span><span class="en">The original gives no NIM denominator and no formula for SIZE or CAP.</span></td><td><span class="vi">Định nghĩa được giữ như báo cáo gốc; mục 3 mô tả biến theo đúng cách đó.</span><span class="en">Definitions are kept as in the original; section 3 describes the variables that way.</span></td></tr>
+<tr><td class="mono">N-9</td><td><span class="vi">FEM được chọn, FGLS được báo cáo</span><span class="en">FEM selected, FGLS reported</span></td><td><span class="vi">Kiểm định F và Hausman chọn FEM; mô hình FGLS cuối không nêu tuỳ chọn ước lượng và thường không chứa hiệu ứng riêng của từng ngân hàng.</span><span class="en">F and Hausman choose FEM; the final FGLS states no options and typically carries no bank-specific effects.</span></td><td><span class="vi">Cả hai mô hình được trình bày cạnh nhau (mục 5.1–5.2). NPL, SIZE, GDP cùng dấu và có ý nghĩa ở cả FEM và FGLS; CAP chỉ có ý nghĩa ở FGLS.</span><span class="en">Both models are shown side by side (5.1–5.2). NPL, SIZE and GDP share sign and significance in FEM and FGLS; CAP is significant only in FGLS.</span></td></tr>
+<tr><td class="mono">N-10</td><td><span class="vi">Biến vĩ mô theo năm</span><span class="en">Year-level macro variables</span></td><td><span class="vi">INF, GDP và COVID chỉ có 6 giá trị khác nhau cho cả 162 quan sát.</span><span class="en">INF, GDP and COVID take only 6 distinct values across all 162 observations.</span></td><td><span class="vi">Kết quả cho ba biến này được đọc là mô tả; sai số chuẩn có thể đánh giá quá cao độ chính xác.</span><span class="en">Results for these three are read as descriptive; standard errors may overstate precision.</span></td></tr>
+</tbody></table></div>
+
+<div class="bx a" style="margin-top:30px"><h3><span class="vi">Phụ lục B · Kiểm tra độc lập (không thuộc báo cáo gốc)</span><span class="en">Appendix B · Independent check (not part of the original report)</span></h3>
+<p class="vi">Một phiên tính lại bằng Python (mã và kết quả trong thư mục <span class="mono">reestimation/</span> của kho lưu trữ) tái lập được hệ số Pooled, FEM và REM của báo cáo gốc sau khi đưa SIZE và COVID về đúng thang. Khi đặt cửa sổ COVID là 2020–2022, hệ số FEM của COVID là +0.209 (p = 0.007 theo sai số gom theo ngân hàng); wild cluster bootstrap theo năm (6 cụm) cho p = 0.014 với COVID, 0.084 với GDP và 0.103 với INF. Với cờ 2019–2022 trong dữ liệu, hệ số là +0.145 (p = 0.059). Dự báo ngoài mẫu theo cửa sổ trượt: RMSE của FEM 0.72, của dự báo “giữ nguyên NIM năm trước” 0.55, tức mô hình giải thích khác biệt giữa các ngân hàng hơn là dự báo NIM năm sau. Các số này là kiểm tra bổ sung, không thay thế kết quả trong mục 5.</p>
+<p class="en">A Python recomputation (code and results in the <span class="mono">reestimation/</span> folder of the repository) reproduces the original Pooled, FEM and REM coefficients once SIZE and COVID are put on the correct scale. With the COVID window set to 2020–2022, the FEM COVID coefficient is +0.209 (p = 0.007 with bank-clustered errors); a wild cluster bootstrap by year (6 clusters) gives p = 0.014 for COVID, 0.084 for GDP and 0.103 for INF. With the 2019–2022 flag in the data, the coefficient is +0.145 (p = 0.059). Rolling-origin out-of-sample RMSE: FEM 0.72 versus 0.55 for a “last year’s NIM” forecast, so the model explains differences between banks rather than predicting next year’s NIM. These are supplementary checks and do not replace the results in section 5.</p></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+<p><span class="vi"><b>Nguồn.</b> Báo cáo thực hành nghề nghiệp gốc (2024), Chương 3–4 và Phụ lục 13; World Bank Open Data; CTCP Chứng khoán SSI (theo báo cáo gốc). Các bảng “như bản in” lấy nguyên từ báo cáo gốc; số liệu ghi “tính lại” lấy từ Phụ lục 13.</span><span class="en"><b>Sources.</b> Original professional practicum report (2024), Chapters 3–4 and Appendix 13; World Bank Open Data; SSI Securities (as cited by the original). Tables marked “as printed” come directly from the original; figures marked “recomputed” come from Appendix 13.</span></p>
+<p><span class="vi">Phân tích học thuật, không phải khuyến nghị đầu tư và không phải tài liệu của PGBank. Báo cáo này không nêu vai trò, nhiệm vụ hay đóng góp cá nhân tại đơn vị thực tập.</span><span class="en">Academic analysis, not investment advice and not a PGBank document. This report states no role, task or personal contribution at the internship unit.</span></p>
+</div></footer>
+
+<script>
+var D=[["ABB",2018,2.4766,7.632,46.355,1.886],["ABB",2019,2.7147,7.647,46.543,2.31],["ABB",2020,2.2969,7.658,46.726,2.092],["ABB",2021,2.7704,9.699,46.781,2.344],["ABB",2022,3.2121,10.03,46.887,2.885],["ABB",2023,2.0617,8.316,47.204,2.912],["ACB",2018,3.5621,6.382,48.227,0.727],["ACB",2019,3.5688,7.24,48.446,0.539],["ACB",2020,3.6983,7.974,48.659,0.591],["ACB",2021,4.0886,8.508,48.907,0.773],["ACB",2022,4.3085,9.614,49.111,0.736],["ACB",2023,3.8899,9.872,49.353,1.207],["BAB",2018,1.9062,7.299,46.463,0.763],["BAB",2019,2.0518,7.243,46.617,0.686],["BAB",2020,1.9676,7.137,46.736,0.791],["BAB",2021,1.9801,7.556,46.768,0.775],["BAB",2022,2.2062,7.609,46.872,0.546],["BAB",2023,1.9393,7.125,47.114,0.917],["BID",2018,2.8684,4.155,50.222,1.902],["BID",2019,2.6444,5.212,50.404,1.745],["BID",2020,2.4527,5.251,50.43,1.76],["BID",2021,2.9167,4.9,50.646,1.0],["BID",2022,2.9302,4.913,50.913,1.158],["BID",2023,2.5786,5.342,51.031,1.25],["BVB",2018,2.0013,7.385,45.404,0.0],["BVB",2019,2.0537,7.209,45.558,2.508],["BVB",2020,2.099,6.367,45.796,2.791],["BVB",2021,2.2054,6.063,46.121,2.535],["BVB",2022,2.3225,6.327,46.168,2.789],["BVB",2023,1.8738,6.65,46.321,3.314],["CTG",2018,2.049,5.782,50.048,1.585],["CTG",2019,2.8683,6.235,50.14,1.156],["CTG",2020,2.8641,6.367,50.253,0.938],["CTG",2021,3.0158,6.115,50.444,1.265],["CTG",2022,2.9794,5.981,50.684,1.239],["CTG",2023,2.8675,6.276,50.852,1.127],["EIB",2018,2.2562,9.75,47.117,1.846],["EIB",2019,2.1201,9.4,47.251,1.707],["EIB",2020,2.1214,10.484,47.189,2.515],["EIB",2021,2.2579,10.725,47.237,1.96],["EIB",2022,3.3151,11.067,47.395,1.798],["EIB",2023,2.4667,11.144,47.517,2.654],["HDB",2018,4.0483,7.789,47.618,1.531],["HDB",2019,4.6952,8.882,47.705,1.365],["HDB",2020,4.7525,7.741,48.181,1.322],["HDB",2021,4.4403,8.219,48.412,1.653],["HDB",2022,5.0768,9.368,48.565,1.669],["HDB",2023,4.9378,7.704,49.098,1.794],["KLB",2018,2.7292,8.864,45.266,0.942],["KLB",2019,2.3612,7.42,45.538,1.021],["KLB",2020,1.8917,6.84,45.703,5.423],["KLB",2021,2.8904,5.583,46.252,1.892],["KLB",2022,2.6556,6.044,46.285,1.89],["KLB",2023,2.5949,6.62,46.306,1.934],["LPB",2018,3.1154,5.826,47.315,1.41],["LPB",2019,3.3688,6.226,47.522,1.445],["LPB",2020,3.1676,5.873,47.784,1.431],["LPB",2021,3.5316,5.81,48.039,1.37],["LPB",2022,3.9683,7.34,48.22,1.455],["LPB",2023,3.237,8.911,48.444,1.339],["MBB",2018,4.564,9.432,48.364,1.332],["MBB",2019,4.9045,9.693,48.548,1.158],["MBB",2020,4.7534,10.121,48.814,1.089],["MBB",2021,5.0893,10.292,49.109,0.899],["MBB",2022,5.7219,10.928,49.372,1.092],["MBB",2023,4.9456,10.234,49.747,1.605],["MSB",2018,2.7944,10.031,46.969,3.006],["MSB",2019,2.4651,9.469,47.158,2.045],["MSB",2020,3.3521,9.55,47.328,1.963],["MSB",2021,3.6552,10.821,47.533,1.742],["MSB",2022,4.3638,12.527,47.596,1.715],["MSB",2023,4.1031,11.722,47.924,2.87],["NAB",2018,2.7314,5.636,46.093,1.544],["NAB",2019,2.6925,5.239,46.428,1.975],["NAB",2020,2.4155,4.913,46.933,0.834],["NAB",2021,3.1242,5.237,47.123,1.571],["NAB",2022,3.2045,7.123,47.335,1.348],["NAB",2023,3.541,7.262,47.577,2.113],["NVB",2018,1.6429,4.464,46.041,1.67],["NVB",2019,1.8249,5.357,46.192,1.926],["NVB",2020,2.1375,4.758,46.349,1.51],["NVB",2021,2.0283,5.779,46.068,3.002],["NVB",2022,1.4174,6.416,46.353,17.93],["NVB",2023,0.5946,5.293,46.452,29.757],["OCB",2018,3.9598,8.8,46.506,2.288],["OCB",2019,3.9253,9.739,46.748,1.842],["OCB",2020,3.8794,11.431,47.116,1.69],["OCB",2021,3.6869,11.819,47.391,1.322],["OCB",2022,3.9648,13.027,47.463,2.229],["OCB",2023,3.5874,12.282,47.767,2.755],["PGB",2018,3.0353,12.33,44.765,3.061],["PGB",2019,2.946,11.91,44.844,3.159],["PGB",2020,2.809,10.87,45.039,2.44],["PGB",2021,2.0029,10.318,45.204,2.524],["PGB",2022,2.9036,9.358,45.478,2.563],["PGB",2023,2.6577,8.771,45.657,2.563],["SGB",2018,3.4481,16.859,44.212,2.201],["SGB",2019,3.6767,15.611,44.375,1.939],["SGB",2020,2.722,15.125,44.445,1.444],["SGB",2021,2.6043,15.072,44.484,1.971],["SGB",2022,3.5785,14.077,44.655,2.125],["SGB",2023,3.232,12.918,44.84,2.026],["SHB",2018,2.0007,5.052,48.2,2.396],["SHB",2019,2.4887,5.067,48.376,1.907],["SHB",2020,2.7943,5.824,48.552,1.832],["SHB",2021,3.6795,7.014,48.848,1.687],["SHB",2022,3.6458,7.788,48.969,2.814],["SHB",2023,3.6347,7.912,49.163,2.847],["SSB",2018,1.9597,5.909,46.997,1.508],["SSB",2019,2.1191,6.942,47.161,2.312],["SSB",2020,1.9252,7.586,47.357,1.856],["SSB",2021,2.8655,8.817,47.589,1.65],["SSB",2022,3.4234,11.335,47.718,1.598],["SSB",2023,3.0908,11.385,47.919,1.938],["STB",2018,2.3378,6.066,48.529,2.129],["STB",2019,2.4667,5.896,48.688,1.937],["STB",2020,2.739,5.879,48.807,1.699],["STB",2021,2.5953,6.575,48.889,1.503],["STB",2022,3.3519,6.526,49.072,0.98],["STB",2023,3.7874,6.782,49.261,2.275],["TCB",2018,4.2232,16.132,48.19,1.753],["TCB",2019,4.4514,16.177,48.447,1.334],["TCB",2020,5.0053,16.973,48.643,0.467],["TCB",2021,5.7942,16.36,49.015,0.66],["TCB",2022,5.3192,16.226,49.312,0.721],["TCB",2023,4.0326,15.495,49.594,1.157],["TPB",2018,3.695,7.8,46.953,1.116],["TPB",2019,4.1176,7.951,47.225,1.291],["TPB",2020,4.4766,8.116,47.552,1.184],["TPB",2021,4.3214,8.875,48.057,0.819],["TPB",2022,3.9873,9.81,48.223,0.843],["TPB",2023,3.9264,9.181,48.341,2.046],["VAB",2018,1.7749,5.94,46.019,0.0],["VAB",2019,1.4949,5.811,46.12,0.0],["VAB",2020,1.7614,6.615,46.298,2.298],["VAB",2021,1.862,6.313,46.522,1.858],["VAB",2022,1.6316,6.906,46.579,1.532],["VAB",2023,1.8582,7.14,46.673,1.593],["VBB",2018,2.4025,8.722,45.554,1.25],["VBB",2019,2.2154,7.281,45.97,1.317],["VBB",2020,0.7639,5.768,46.379,1.752],["VBB",2021,1.5974,5.557,46.555,3.651],["VBB",2022,1.7638,5.63,46.662,3.653],["VBB",2023,1.6698,4.988,46.974,2.565],["VCB",2018,2.7821,5.789,49.932,0.985],["VCB",2019,3.0995,6.62,50.119,0.731],["VCB",2020,2.9213,7.095,50.236,0.623],["VCB",2021,3.1576,7.716,50.33,0.637],["VCB",2022,3.4055,7.478,50.688,0.683],["VCB",2023,3.0147,9.164,50.708,0.98],["VIB",2018,3.7856,7.665,46.984,2.519],["VIB",2019,3.9362,7.278,47.391,1.963],["VIB",2020,4.0463,7.346,47.798,1.745],["VIB",2021,4.3846,7.848,48.137,2.318],["VIB",2022,4.7252,9.525,48.284,2.452],["VIB",2023,4.7052,9.256,48.542,3.144],["VPB",2018,8.7985,10.749,48.2,3.499],["VPB",2019,9.4261,11.19,48.422,3.421],["VPB",2020,8.7174,12.599,48.574,3.413],["VPB",2021,7.7043,15.761,48.96,4.572],["VPB",2022,7.608,16.403,49.165,5.735],["VPB",2023,5.6863,17.115,49.539,5.005]];
+var YR={2018:[3.5396,7.465,0],2019:[2.7958,7.359,1],2020:[3.2209,2.865,1],2021:[1.8347,2.562,1],2022:[3.1565,8.02,1],2023:[3.3533,5.053,0]};
+var Y=[2018,2019,2020,2021,2022,2023];
+var CORR=[["NIM",1],["CAP",.5517,1],["SIZE",.3663,-.1032,1],["NPL",-.1019,-.0183,-.1503,1],["INF",-.0396,-.0054,-.0275,.0651,1],["GDP",.0273,.0096,-.0559,.0161,.5052,1],["COVID",-.0618,.0018,-.0004,.0889,.5837,.2251,1]];
+var FG=[["CAP",.1846149,.0261627,0],["SIZE",.2938396,.0473408,0],["NPL",-.0522586,.0121852,0],["INF",-.0529798,.0459395,0],["GDP",.03122,.0121553,0],["COVID",-.1283786,.0637694,1]];
+var lang="vi",NS="http://www.w3.org/2000/svg";
+function T(v,e){return lang==="vi"?v:e}
+function mean(a){var s=0;for(var i=0;i<a.length;i++)s+=a[i];return s/a.length}
+function el(n,a,p,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;if(p)p.appendChild(e);return e}
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
+function by(id){return D.filter(function(r){return r[0]===id})}
+function yMean(y){return mean(D.filter(function(r){return r[1]===y}).map(function(r){return r[2]}))}
+var IDS=[];D.forEach(function(r){if(IDS.indexOf(r[0])<0)IDS.push(r[0])});
+var BM=IDS.map(function(i){var b=by(i);return{id:i,nim:mean(b.map(function(r){return r[2]})),cap:mean(b.map(function(r){return r[3]})),size:mean(b.map(function(r){return r[4]})),npl:mean(b.map(function(r){return r[5]}))}});
+function rank(key,id){var s=BM.slice().sort(function(a,b){return b[key]-a[key]});for(var i=0;i<s.length;i++)if(s[i].id===id)return i+1}
+function fmt(x,d){var s=x.toFixed(d);return lang==="vi"?s.replace(".",","):s}
+function clr(){return{ink:css("--ink"),mute:css("--mute"),acc:css("--acc"),line:css("--line"),warn:css("--warn")}}
+
+function hero(){var s=document.getElementById("fHero");s.innerHTML="";var c=clr();
+var W=560,H=330,L=40,R=10,Tp=14,B=34,x0=L,x1=W-R,y0=H-B,y1=Tp,vmax=10;
+function X(i){return x0+(x1-x0)*(i+.5)/6}function Yv(v){return y0-(y0-y1)*v/vmax}
+for(var v=0;v<=10;v+=2){el("line",{x1:x0,x2:x1,y1:Yv(v),y2:Yv(v),stroke:c.line,"stroke-width":.7},s);el("text",{x:x0-8,y:Yv(v)+4,"text-anchor":"end","font-size":11,fill:c.mute,"font-family":"monospace"},s,v)}
+el("text",{x:x0+4,y:y1+10,"font-size":10.5,fill:c.mute,"font-family":"monospace"},s,"NIM %");
+Y.forEach(function(y,i){var cw=(x1-x0)/6;
+if(YR[y][2])el("rect",{x:X(i)-cw/2,y:y1,width:cw,height:y0-y1,fill:c.warn,opacity:.07},s);
+D.filter(function(r){return r[1]===y}).forEach(function(r,j){var jit=((j*37)%23-11)/11*cw*.32;var ci=el("circle",{cx:X(i)+jit,cy:Yv(r[2]),r:3.2,fill:c.mute,opacity:.55,"class":"an an-pop",style:"--i:"+(i*.1+j*.008).toFixed(3)},s);el("title",{},ci,r[0]+" "+y+": "+fmt(r[2],2)+"%")});
+var m=yMean(y);el("line",{x1:X(i)-cw*.4,x2:X(i)+cw*.4,y1:Yv(m),y2:Yv(m),stroke:c.acc,"stroke-width":2.6,"class":"an an-x",style:"--i:"+(i*.1+.4).toFixed(2)},s);
+el("text",{x:X(i),y:y0+18,"text-anchor":"middle","font-size":11.5,fill:c.ink,"font-family":"monospace"},s,y)});
+el("rect",{x:x1-196,y:y1+2,width:8,height:8,fill:c.warn,opacity:.25},s);
+el("text",{x:x1-184,y:y1+10,"font-size":10.5,fill:c.mute,"font-family":"monospace"},s,T("năm gắn cờ COVID trong dữ liệu","years flagged COVID in data"))}
+
+function years(){var tb=document.querySelector("#tYear tbody");tb.innerHTML="";Y.forEach(function(y){var tr=document.createElement("tr");if(YR[y][2])tr.className="fl";
+tr.innerHTML="<td class='mono'>"+y+"</td><td class='n'>"+YR[y][0].toFixed(2)+"</td><td class='n'>"+YR[y][1].toFixed(2)+"</td><td class='n'>"+(YR[y][2]?T("Có","Yes"):T("Không","No"))+"</td><td class='n'>"+yMean(y).toFixed(2)+"</td>";tb.appendChild(tr)})}
+
+function banks(){var s=document.getElementById("fBanks");s.innerHTML="";var c=clr();var d=BM.slice().sort(function(a,b){return b.nim-a.nim});
+var W=900,H=300,L=36,B=30,Tp=10,n=d.length,bw=(W-L-6)/n,vmax=8.5,mu=mean(D.map(function(r){return r[2]}));
+function Yv(v){return H-B-(H-B-Tp)*v/vmax}
+for(var v=0;v<=8;v+=2){el("line",{x1:L,x2:W,y1:Yv(v),y2:Yv(v),stroke:c.line,"stroke-width":.7},s);el("text",{x:L-6,y:Yv(v)+4,"text-anchor":"end","font-size":11,fill:c.mute,"font-family":"monospace"},s,v)}
+d.forEach(function(b,i){var x=L+i*bw+bw*.18,w=bw*.64;var r=el("rect",{x:x,y:Yv(b.nim),width:w,height:H-B-Yv(b.nim),fill:c.mute,opacity:.62,"class":"an an-y",style:"--i:"+(i*.03).toFixed(2)},s);el("title",{},r,b.id+": "+fmt(b.nim,2)+"%");
+el("text",{x:x+w/2,y:H-B+12,"text-anchor":"middle","font-size":8.6,fill:c.mute,"font-family":"monospace",transform:"rotate(-60 "+(x+w/2)+" "+(H-B+12)+")"},s,b.id)});
+el("line",{x1:L,x2:W,y1:Yv(mu),y2:Yv(mu),stroke:c.acc,"stroke-width":1.4,"stroke-dasharray":"5 4","class":"an an-fade",style:"--i:1"},s);
+el("text",{x:W-4,y:Yv(mu)-5,"text-anchor":"end","font-size":11,fill:c.acc,"font-family":"monospace"},s,T("TB mẫu ","sample mean ")+fmt(mu,2)+"%")}
+
+function corr(){var t=document.getElementById("tCorr");var h="<thead><tr><th></th>";CORR.forEach(function(r){h+="<th class='mono'>"+r[0]+"</th>"});h+="</tr></thead><tbody>";
+CORR.forEach(function(r,i){h+="<tr><th class='mono' style='text-align:right;padding-right:8px'>"+r[0]+"</th>";for(var j=0;j<7;j++){if(j>i){h+="<td></td>";continue}var v=r[j+1];var a=Math.min(1,Math.abs(v))*.85;var col=v>=0?"50,127,118":"187,105,70";var diag=i===j;h+="<td class='hc' style='--i:"+(i*7+j)+";background:"+(diag?"transparent":"rgba("+col+","+a.toFixed(2)+")")+";color:"+(a>.5&&!diag?"#fff":"inherit")+"'>"+(diag?"1":v.toFixed(2))+"</td>"}h+="</tr>"});t.innerHTML=h+"</tbody>"}
+
+function forest(){var s=document.getElementById("fForest");s.innerHTML="";var c=clr();var W=760,H=280,L=70,R=170,Tp=14,B=36,lo=-.30,hi=.42;
+function X(v){return L+(W-L-R)*(v-lo)/(hi-lo)}
+for(var v=-.3;v<=.4001;v+=.1){el("line",{x1:X(v),x2:X(v),y1:Tp,y2:H-B,stroke:c.line,"stroke-width":Math.abs(v)<.001?1.6:.6},s);el("text",{x:X(v),y:H-B+16,"text-anchor":"middle","font-size":11,fill:c.mute,"font-family":"monospace"},s,(v>0?"+":"")+v.toFixed(1))}
+var rh=(H-B-Tp)/FG.length;
+FG.forEach(function(f,i){var cy=Tp+rh*(i+.5),cov=f[3],b=cov?-f[1]:f[1],lo2=b-1.96*f[2],hi2=b+1.96*f[2],sig=lo2>0||hi2<0;var col=cov?c.warn:(sig?c.acc:c.mute);
+el("text",{x:L-10,y:cy+4,"text-anchor":"end","font-size":12.5,fill:c.ink,"font-family":"monospace"},s,f[0]);
+el("line",{x1:X(lo2),x2:X(hi2),y1:cy,y2:cy,stroke:col,"stroke-width":2.2,"class":"an an-x",style:"--i:"+(i*.12).toFixed(2)},s);
+el("circle",{cx:X(b),cy:cy,r:5,fill:col,"class":"an an-pop",style:"--i:"+(i*.12+.4).toFixed(2)},s);
+if(cov){el("circle",{cx:X(f[1]),cy:cy,r:4.5,fill:"none",stroke:c.mute,"stroke-width":1.4},s)}
+el("text",{x:W-R+14,y:cy+4,"font-size":11.5,fill:col,"font-family":"monospace","class":"an an-fade",style:"--i:"+(i*.12+.6).toFixed(2)},s,(b>=0?"+":"")+b.toFixed(3)+"  "+(sig?T("có ý nghĩa","significant"):T("không ý nghĩa","not sig.")))});
+el("text",{x:X(0),y:H-4,"text-anchor":"middle","font-size":10.5,fill:c.mute,"font-family":"monospace"},s,T("hệ số FGLS (đơn vị riêng của từng biến)","FGLS coefficient (each variable’s own units)"))}
+
+function pgb(){var s=document.getElementById("fPgb");s.innerHTML="";var c=clr();var P=by("PGB");var W=640,H=300,L=40,R=16,Tp=18,B=36,vmin=1.5,vmax=4;
+function X(i){return L+(W-L-R)*(i+.5)/6}function Yv(v){return H-B-(H-B-Tp)*(v-vmin)/(vmax-vmin)}
+for(var v=1.5;v<=4.01;v+=.5){el("line",{x1:L,x2:W-R,y1:Yv(v),y2:Yv(v),stroke:c.line,"stroke-width":.7},s);el("text",{x:L-6,y:Yv(v)+4,"text-anchor":"end","font-size":11,fill:c.mute,"font-family":"monospace"},s,v.toFixed(1))}
+var cw=(W-L-R)/6;Y.forEach(function(y,i){if(YR[y][2])el("rect",{x:X(i)-cw/2,y:Tp,width:cw,height:H-B-Tp,fill:c.warn,opacity:.07},s);el("text",{x:X(i),y:H-B+18,"text-anchor":"middle","font-size":11.5,fill:c.ink,"font-family":"monospace"},s,y)});
+var pm="",pp="";Y.forEach(function(y,i){pm+=(i?"L":"M")+X(i)+","+Yv(yMean(y))});P.forEach(function(r,i){pp+=(i?"L":"M")+X(i)+","+Yv(r[2])});
+el("path",{d:pm,fill:"none",stroke:c.mute,"stroke-width":2,"stroke-dasharray":"6 4","class":"an an-fade"},s);
+el("path",{d:pp,fill:"none",stroke:c.acc,"stroke-width":2.8,pathLength:1,"stroke-dasharray":1,"class":"an an-draw",style:"--i:.2"},s);
+P.forEach(function(r,i){el("circle",{cx:X(i),cy:Yv(r[2]),r:4.4,fill:c.acc,"class":"an an-pop",style:"--i:"+(.2+i*.25).toFixed(2)},s);var rk=D.filter(function(q){return q[1]===r[1]}).sort(function(a,b){return b[2]-a[2]}).map(function(q){return q[0]}).indexOf("PGB")+1;
+el("text",{x:X(i),y:Yv(r[2])+(r[1]===2021?22:-11),"text-anchor":"middle","font-size":11.5,fill:c.acc,"font-family":"monospace","font-weight":700,"class":"an an-fade",style:"--i:"+(.35+i*.25).toFixed(2)},s,fmt(r[2],2)+" · #"+rk)});
+el("text",{x:L+4,y:Tp-4,"font-size":11,fill:c.acc,"font-family":"monospace"},s,"— PGB");
+el("text",{x:L+64,y:Tp-4,"font-size":11,fill:c.mute,"font-family":"monospace"},s,"- - "+T("TB 27 ngân hàng","27-bank mean"));
+el("text",{x:W-R,y:Tp-4,"text-anchor":"end","font-size":11,fill:c.warn,"font-family":"monospace"},s,T("nền = năm gắn cờ COVID","shaded = COVID-flagged"));
+var tb=document.querySelector("#tPgb tbody");tb.innerHTML="";var pb=BM.filter(function(b){return b.id==="PGB"})[0];
+[["NIM %","nim"],["CAP %","cap"],["SIZE","size"],["NPL %","npl"]].forEach(function(k){var sm=mean(BM.map(function(b){return b[k[1]]}));tb.insertAdjacentHTML("beforeend","<tr><td class='mono'>"+k[0]+"</td><td class='n'>"+fmt(pb[k[1]],2)+"</td><td class='n'>"+fmt(sm,2)+"</td><td class='n'>"+rank(k[1],"PGB")+"</td></tr>")})}
+
+function render(){hero();years();banks();corr();forest();pgb()}
+function setLang(l){lang=l;document.documentElement.lang=l;document.getElementById("bl").setAttribute("aria-pressed",l==="en");try{localStorage.setItem("thnn-lang",l)}catch(e){}render()}
+function setTheme(t){document.documentElement.setAttribute("data-theme",t);document.getElementById("bt").setAttribute("aria-pressed",t==="dark");try{localStorage.setItem("thnn-theme",t)}catch(e){}render()}
+document.getElementById("bl").onclick=function(){setLang(lang==="vi"?"en":"vi")};
+document.getElementById("bt").onclick=function(){setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark")};
+var sl=null,st=null;try{sl=localStorage.getItem("thnn-lang");st=localStorage.getItem("thnn-theme")}catch(e){}
+if(st==="dark")document.documentElement.setAttribute("data-theme","dark");
+document.getElementById("bt").setAttribute("aria-pressed",document.documentElement.getAttribute("data-theme")==="dark");
+if(sl==="en"){lang="en";document.documentElement.lang="en";document.getElementById("bl").setAttribute("aria-pressed","true")}
+render();
+(function(){var links=[].slice.call(document.querySelectorAll(".nav a")),secs=links.map(function(a){return document.querySelector(a.getAttribute("href"))});
+if(!("IntersectionObserver" in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=secs.indexOf(e.target);links.forEach(function(l,j){l.classList.toggle("on",i===j)})}})},{rootMargin:"-45% 0px -50% 0px"});secs.forEach(function(s){if(s)io.observe(s)})})();
+
+(function(){var root=document.documentElement;
+var rm=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(rm||!("IntersectionObserver" in window)){root.classList.remove("js");return}
+var pg=document.getElementById("pg"),tk=false;
+function prog(){var h=document.documentElement.scrollHeight-innerHeight;pg.style.transform="scaleX("+(h>0?Math.min(1,scrollY/h):0)+")";tk=false}
+addEventListener("scroll",function(){if(!tk){tk=true;requestAnimationFrame(prog)}},{passive:true});prog();
+var q='.sh,section>.wrap>*:not(.cols):not(.hgrid):not(.three):not(.sh),.hgrid>*,.hgrid>div>*,.cols>div>*,.cols>aside,.three>div,.flow li,footer p';
+var els=[].slice.call(document.querySelectorAll(q)).filter(function(e){return !e.classList.contains("hgrid")});
+var cnt={};[].slice.call(document.querySelectorAll('tbody')).forEach(function(tb){[].slice.call(tb.rows).forEach(function(r,k){r.style.setProperty('--r',Math.min(k,14))})});
+els.forEach(function(e){var par=e.parentNode;var k=par.__k=(par.__k||0);
+ if(e.offsetParent!==null||e.matches("li")){par.__k=k+1}
+ var d=e.matches(".flow li")?k*.22:Math.min(.5,k*.08);
+ e.style.setProperty("--d",d.toFixed(2)+"s");e.classList.add("rv")});
+function count(el){[].slice.call(el.querySelectorAll("b[data-n]")).forEach(function(b){var n=+b.getAttribute("data-n"),t0=null;
+ function f(t){if(t0===null)t0=t;var u=Math.min(1,(t-t0)/1100),v=1-Math.pow(1-u,3);b.textContent=Math.round(n*v);if(u<1)requestAnimationFrame(f)}
+ b.textContent="0";requestAnimationFrame(f)})}
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;var e=en.target;e.classList.add("in");io.unobserve(e);
+ if(e.matches("figure,.heat"))setTimeout(function(){e.classList.add("done")},4500);
+ if(e.matches(".facts"))count(e)})},{threshold:.12,rootMargin:"0px 0px -6% 0px"});
+els.forEach(function(e){io.observe(e)});
+[].slice.call(document.querySelectorAll("figure,.heat")).forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
